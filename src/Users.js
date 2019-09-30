@@ -42,8 +42,8 @@ export const UserList = props => (
             {/* <TextField source="username" /> */}
             <EmailField source="email" />
             <TextField source="profile" />
-            <DateField label="Availablity" source="availability.start_date" />
-            <DateField source="availability.end_date" />
+            <DateField label="Availablity" source="avail_start" />
+            <DateField label="Availablity End"source="avail_end" />
             <ArrayField source="tags">
                 <SingleFieldList>
                   <ChipField source="name" />
@@ -63,8 +63,10 @@ export const UserEdit = props => (
             {/* <TextInput source="username" /> */}
             <LongTextInput source="profile" />
             {/* <TextInput source="password" /> */}
-            <DateInput source="availability.start_date" label="Start date" options={{ format: 'DD/MM/YYYY' }} />
-            <DateInput source="availability.end_date" label="End date" options={{ format: 'DD/MM/YYYY' }} />
+            <DateInput source="avail_start" label="Start date" options={{ format: 'MM/DD/YYYY' }} />
+            <DateInput source="avail_end" label="End date" options={{ format: 'MM/DD/YYYY' }} />
+            {/* <DateInput source="availability.start_date" label="Start date" options={{ format: 'YYYY-MM-DD' }} />
+            <DateInput source="availability.end_date" label="End date" options={{ format: 'DD/MM/YYYY' }} /> */}
             <ReferenceArrayInput label="Tags" source="tag_ids" reference="tags" allowEmpty>
                 <CheckboxGroupInput optionText="name" />
             </ReferenceArrayInput>
