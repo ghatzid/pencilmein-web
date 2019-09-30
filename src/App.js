@@ -1,83 +1,80 @@
+// in src/App.js
 import React, { Component } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom'
-import './App.css';
-import Login from './Components/Login';
-import UserContainer from './Containers/UserContainer';
-import AdminContainer from './Containers/AdminContainer';
-import BadURL from './Containers/BadURL';
+import { Admin, Resource} from 'react-admin';
+import { Route } from 'react-router-dom';
+import { UserList, UserEdit, UserCreate} from './Users';
+import profile from './profile';
+import ProfileEdit from './profile/ProfileEdit'
+// import { TagList, TagEdit, TagCreate, TagFilter} from './Tags';
+import UserIcon from '@material-ui/icons/Group';
+// import Dashboard from './Dashboard';
+import authProvider from './authProvider';
+import DataProvider from './DataProvider';
+// import { minLength } from 'ra-core';
+// import simpleRestProvider from 'ra-data-simple-rest';
+import MyLayout from './MyLayout';
+// import jsonServerProvider from 'ra-data-json-server';
+
+
+// const dataProvider = jsonServerProvider('http://jsonplaceholder.typicode.com');
+
+
+
+
 class App extends Component {
-  state = {
-    user: null
-  };
+  
+  render(){
+    return(  
+    
+      <Admin 
+        authProvider={authProvider} 
+        dataProvider={DataProvider}
+         
+        customRoutes={[
+          <Route
+            key="my-profile"
+            path="/my-profile"
+            component={profile.edit}
+            // noLayout
+          />
+        ]}
+        // appLayout={MyLayout}
+      >
+    
 
-  // CDM
-  componentDidMount() {
-    // check if state.user is null
-    // check if localstorage has a userid
-    // then fetch 
-    const token = localStorage.getItem('token')
-    console.log(`token: ${token}`)
-    if (token) {
-      fetch(`http://localhost:3000/api/v1/autologin`, {
-        headers: {
-          'accept': 'application/json', 
-          Authorization: token
-        }
-      })
-        .then(response => response.json())
-        .then(data => {
-          this.setState({user: data})
-          if (data.errors) {
-            console.log("no good")
-          } 
-          else  {
-          // localStorage.setItem('token', data.token)
-          // check if logged in user is admin
-          if (data.is_admin) { 
-            this.props.history.push('/admin')
-          } 
-          else  {
-            this.props.history.push('/user')
-          }
-        }
-      })                
-    }
-  }
 
-  setUser = user => {
-    this.setState({user: user})
-  }
+    {permissions => [
+        // Restrict access to the edit and remove views to admin only
+        permissions === 'admin' ?
+        <Resource
+          name="users" 
+          list={UserList} 
+          edit={UserEdit} 
+          create={UserCreate} 
+          icon={UserIcon}  
+        /> 
+        : null ,
 
-  render() {
-    console.log('APP STATE USER', this.state.user)
-    return (
-      <div>
-        <Switch>
-        <Route path="/user" render={() => {
-            return (
-              <div>
-                <UserContainer/>
-              </div>
-            )
-          }} />
-
-        <Route path="/admin" render={() => {
-            return (
-              <div>
-                <AdminContainer/>
-              </div>
-            )
-          }} />
-                
-        <Route exact path="/" render={() => 
-          <Login user={this.state.user} setUser={this.setUser} />}
+        permissions === 'user' ? 
+        <Resource 
+          name="profile"
+          list={ProfileEdit} 
+     
         />
-        <Route component={BadURL} />
-        </Switch>
-      </div>
-    );
+        : null ,
+
+
+        <Resource name="tags"/>,
+        <Resource name="user_tags" />,
+        <Resource name="assets" />,
+        <Resource name="availabilities" />
+    ]}
+
+    </Admin>
+    )
+    
   }
 }
 
-export default withRouter(App);
+export default App;
 

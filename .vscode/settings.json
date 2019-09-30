@@ -1,1 +1,14 @@
-{}
+{
+  "files.exclude": {
+    "node_modules": true,
+    ".git": true,
+    "src/serviceWorker.js": true,
+    "src/logo.svg": true,
+    ".DS_Store": true,
+    "public/favicon.ico": true,
+    "public/logo192.png": true,
+    "public/logo512.png": true,
+    "public/robots.txt": true,
+    "public/manifest.json": true
+  }
+}
