@@ -12,40 +12,6 @@ import {
 
 const API_URL = 'http://localhost:3000/api/v1';
 
-//** HANDLER FOR USER PROFILES */
-
-// A function decorating a dataProvider for handling user profiles
-// const handleUserProfile =  (type, resource, params) => {
-//   // I know I only GET or UPDATE the profile as there is only one for the current user
-//   // To showcase how I can do something completely different here, I'll store it in local storage
-//   // You can replace this with a customized fetch call to your own API route, too
-//   if (resource === 'profile') {
-//     switch (type) {
-//       case GET_ONE:
-//         return { url: `${API_URL}/${resource}/${params.id}` 
-//       };
-//       case UPDATE:
-//         return {
-//             url: `${API_URL}/${resource}/${params.id}`,
-//             options: { method: 'PUT', body: JSON.stringify(params.data) },
-//           };
-          
-          
-          
-          
-//         }
-//       }
-      
-     
-//       // Fallback to the dataProvider default handling for all other resources
-//   console.log("NOT A USER PROFILE")
-//   return convertDataProviderRequestToHTTP(type, resource, params);
-// }
-
-
-
-
-
 /**
  * @param {String} type One of the constants appearing at the top of this file, e.g. 'UPDATE'
  * @param {String} resource Name of the resource to fetch, e.g. 'posts'
@@ -67,8 +33,9 @@ const convertDataProviderRequestToHTTP = (type, resource, params) => {
             range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
             filter: JSON.stringify(params.filter),
         };
-        return { url: `${API_URL}/${resource}` };
-        // return { url: `${API_URL}/${resource}?${stringify(query)}` };
+        // return { url: `${API_URL}/${resource}` };
+        console.log("Query", query, stringify(query))
+        return { url: `${API_URL}/${resource}?${stringify(query)}` };
     }
     case GET_ONE:
         return { url: `${API_URL}/${resource}/${params.id}` 
@@ -119,13 +86,14 @@ const convertDataProviderRequestToHTTP = (type, resource, params) => {
 
 const convertHTTPResponseToDataProvider = (response, type, resource, params) => {
     const { headers, json } = response;
+    console.log("Response", response)
     switch (type) {
     case GET_LIST:
-        return {
-            data: json.map(x => x),
-            total: parseInt(headers.get('content-range'), 10),
-            // total: parseInt(headers.get('content-range').split('/').pop(), 10),
-        };
+      return {
+        data: json.map(x => x),
+        total: parseInt(headers.get('content-range'), 10),
+        // total: parseInt(headers.get('content-range').split('/').pop(), 10),
+      };
     case CREATE:
         return { data: { ...params.data, id: json.id } };
     default:

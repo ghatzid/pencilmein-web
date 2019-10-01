@@ -36,12 +36,12 @@ SingleFieldList,
 
 export const UserList = props => (
     <List filters={<UserFilter />} {...props}>
+    {/* <List {...props}> */}
         <Datagrid rowClick="edit">
             <TextField source="id" />
             <FunctionField label="Full Name" render={record => `${record.first_name} ${record.last_name}`} />
-            {/* <TextField source="username" /> */}
             <EmailField source="email" />
-            <TextField source="profile" />
+            {/* <TextField source="profile" /> */}
             <DateField label="Availablity" source="avail_start" />
             <DateField label="Availablity End"source="avail_end" />
             <ArrayField source="tags">
@@ -87,8 +87,8 @@ export const UserCreate = props => (
 
 export const UserFilter = (props) => (
   <Filter {...props}>
-      <TextInput label="Search" source="q" alwaysOn />
-      <ReferenceInput label="Tags" source="userId" reference="tags" allowEmpty>
+      {/* <TextInput label="Search" source="q" alwaysOn /> */}
+      <ReferenceInput label="Tags" source="tag_ids" reference="tags" allowEmpty>
           <SelectInput optionText="name" />
       </ReferenceInput>
   </Filter>
