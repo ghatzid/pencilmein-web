@@ -1,6 +1,6 @@
 // in src/App.js
 import React, { Component } from 'react';
-import { Admin, Resource} from 'react-admin';
+import { Admin, Login, Resource} from 'react-admin';
 import { Route } from 'react-router-dom';
 import { UserList, UserEdit, UserCreate} from './Users';
 import profile from './profile';
@@ -18,6 +18,8 @@ import MyLayout from './MyLayout';
 
 // const dataProvider = jsonServerProvider('http://jsonplaceholder.typicode.com');
 
+const MyLoginPage = () => <Login backgroundImage="/background.jpg" />;
+
 
 
 
@@ -29,6 +31,8 @@ class App extends Component {
       <Admin 
         authProvider={authProvider} 
         dataProvider={DataProvider}
+        loginPage={MyLoginPage}
+        appLayout={MyLayout}
          
         customRoutes={[
           <Route
@@ -38,7 +42,7 @@ class App extends Component {
             // noLayout
           />
         ]}
-        // appLayout={MyLayout}
+      
       >
     
 
@@ -66,7 +70,7 @@ class App extends Component {
 
         <Resource name="tags"/>,
         <Resource name="user_tags" />,
-        <Resource name="assets" />,
+        // <Resource name="assets" />,
         <Resource name="availabilities" />
     ]}
 

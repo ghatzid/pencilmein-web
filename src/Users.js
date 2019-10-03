@@ -35,9 +35,10 @@ SingleFieldList,
 
 
 export const UserList = props => (
-    <List filters={<UserFilter />} {...props}>
+    <List filters={<UserFilter />} {...props}
+    title="User Management">
     {/* <List {...props}> */}
-        <Datagrid rowClick="edit">
+        <Datagrid rowClick="edit" expand={<UserEdit /> } >
             <TextField source="id" />
             <FunctionField label="Full Name" render={record => `${record.first_name} ${record.last_name}`} />
             <EmailField source="email" />
