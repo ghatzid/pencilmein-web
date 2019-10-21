@@ -2,22 +2,15 @@ import React from 'react';
 import { 
 
   Edit,
-
   TextInput, 
   LongTextInput,
-
   DateInput,
-  
-
   SimpleForm,
-
   CheckboxGroupInput,
-
   ReferenceArrayInput,
 
 } from 'react-admin';
 // import { TagList } from './Tags';
-
 
 export const ProfileEdit = ({ staticContext, ...props }) => (
 
