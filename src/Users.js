@@ -39,7 +39,7 @@ export const UserList = props => (
     title="User Management">
     {/* <List {...props}> */}
         <Datagrid rowClick="edit" expand={<UserEdit /> } >
-            <TextField source="id" />
+            <TextField label="ID" source="id" />
             <FunctionField label="Full Name" render={record => `${record.first_name} ${record.last_name}`} />
             <EmailField source="email" />
             {/* <TextField source="profile" /> */}
