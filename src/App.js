@@ -1,27 +1,15 @@
-// in src/App.js
 import React, { Component } from 'react';
 import { Admin, Login, Resource} from 'react-admin';
 import { Route } from 'react-router-dom';
 import { UserList, UserEdit, UserCreate} from './Users';
 import profile from './profile';
 import ProfileEdit from './profile/ProfileEdit'
-// import { TagList, TagEdit, TagCreate, TagFilter} from './Tags';
 import UserIcon from '@material-ui/icons/Group';
-// import Dashboard from './Dashboard';
 import authProvider from './authProvider';
 import DataProvider from './DataProvider';
-// import { minLength } from 'ra-core';
-// import simpleRestProvider from 'ra-data-simple-rest';
 import MyLayout from './MyLayout';
-// import jsonServerProvider from 'ra-data-json-server';
 
-
-// const dataProvider = jsonServerProvider('http://jsonplaceholder.typicode.com');
-
-const MyLoginPage = () => <Login backgroundImage="/background.jpg" />;
-
-
-
+// const MyLoginPage = () => <Login backgroundImage="/background.jpg" />;
 
 class App extends Component {
   
@@ -31,7 +19,7 @@ class App extends Component {
       <Admin 
         authProvider={authProvider} 
         dataProvider={DataProvider}
-        loginPage={MyLoginPage}
+        // loginPage={MyLoginPage}
         appLayout={MyLayout}
          
         customRoutes={[
