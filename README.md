@@ -1,4 +1,4 @@
-## Pencil Me In
+## PencilMeIn
 A client portal + admin dashboard desigend to aid literary agents with client management
 
 ## Frameworks
